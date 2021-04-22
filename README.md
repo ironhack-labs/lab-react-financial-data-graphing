@@ -12,7 +12,7 @@ They cover news and analysis on the trends, price movements, technologies, compa
 
 In this exercise, we will be using one of their data repositories: the [Bitcoin Price Index](https://web.archive.org/web/20191106152143/https://www.coindesk.com/api). CoinDesk provides a simple API to make its Bitcoin Price Index data programmatically, and we are going to use it to represent the values in a chart.
 
-The Bitcoin Price Index is the value that has bitcoin in different currencies. So we are going to show these variations in a graphic with [Chart.js](http://www.chartjs.org/).
+The Bitcoin Price Index is the value that has bitcoin in different currencies. So we are going to show these variations in a chart with [Chart.js](http://www.chartjs.org/).
 
 :eyes: **[**ChartJS**](http://www.chartjs.org/) (also known as chart.js) is an open-source library that allows us to create amazing static and animated charts through HTML5 canvas and JavaScript.**
 
@@ -34,8 +34,6 @@ $ git push origin master
 - Create Pull Request so your TAs can check up your work.
 
 # Instructions
-
-We have already created a JavaScript file to add all your AJAX code: `public/javascripts/financial-data.js`
 
 The app will be a super simple exercise where we are going to represent some data in a line chart.
 
@@ -62,6 +60,10 @@ We are going to use Axios to make the AJAX Request, so we have to install and im
 
 Once we have the desired data, we have to show it as a chart. We are going to use [Chart.js](http://www.chartjs.org/) to do that. So we have to add the library through `npm`.
 
+```bash
+ $ npm install chart.js
+```
+
 Once we installed the library, we have to represent the values we got in Iteration 1 in a [Line Chart](http://www.chartjs.org/docs/#line-chart-introduction).
 
 **Note**: Before you ask for help in the chart representation, try to read the documentation and figure out how it works. :)
@@ -77,7 +79,7 @@ Once we installed the library, we have to represent the values we got in Iterati
 
 As you can see, by default, the API response gives us the last month's Price Index. In this iteration, we are going to add two date `input` to be able to filter these dates.
 
-Check out the [CoinDesk API documentation](https://web.archive.org/web/20191106152143/https://www.coindesk.com/api) (Historical BPI data) to figure out how we can filter the data and get the values between two dates.
+Check out the [CoinDesk API documentation](https://www.coindesk.com/coindesk-api) (Historical BPI data) to figure out how we can filter the data and get the values between two dates.
 
 To finish up this iteration, remember that the data has to be loaded every time we select a date, so you must add a listener and trigger the load data function every time that the date selector changes its value.
 
@@ -95,7 +97,7 @@ We are going to create a `<select>` input to allow the user to indicate which cu
 
 **Feel free to add as many currencies as you like.**
 
-As in the dates filter, the data has to be reloaded every time the currency changes. Again, in the [CoinDesk API documentation](https://web.archive.org/web/20191106152143/https://www.coindesk.com/api), you can find how to indicate a specific currency.
+As in the dates filter, the data has to be reloaded every time the currency changes. Again, in the [CoinDesk API documentation](https://www.coindesk.com/coindesk-api), you can find how to indicate a specific currency.
 
 **Tasks**
 
