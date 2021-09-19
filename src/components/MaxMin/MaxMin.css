@@ -1,0 +1,12 @@
+.max-min-container > h3 {
+  font-size: 2em;
+}
+
+.max-min-container > p {
+  font-size: 1em;
+}
+
+.max-min-container {
+  margin: 20px;
+  text-align: right;
+}

@@ -1,0 +1,10 @@
+.currency-filter-container {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin: 25px;
+}
+
+.currency-filter-container > select {
+  height: 2em;
+}
