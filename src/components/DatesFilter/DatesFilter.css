@@ -1,0 +1,22 @@
+.dates-filter-fields > input {
+  font-size: 1em;
+  height: 2em;
+  margin: auto 20px auto 10px;
+}
+
+.dates-filter-fields > p {
+  font-size: 1em;
+}
+
+.dates-filter-fields {
+  display: flex;
+  align-items: center;
+}
+
+.dates-filer-container {
+  margin: 25px;
+}
+
+.dates-filer-container > h3 {
+  font-size: 2em;
+}
