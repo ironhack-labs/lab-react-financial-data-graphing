@@ -4,8 +4,13 @@ import { React, useState } from "react";
 
 function App() {
   const [dates, setDates] = useState({
-    start: "2021-09-20",
-    end: "2021-08-21"
+    start: "2021-08-21",
+    end: "2021-09-20"
+  });
+
+  const [state, setState] = useState({
+    dates: [],
+    values: [],
   });
 
   return (
@@ -13,8 +18,9 @@ function App() {
       <InputDate
         dates={dates}
         setDates={setDates}
+        state={state}
       />
-      <Graph dates={dates} />
+      <Graph dates={dates} state={state} setState={setState} />
     </div>
   );
 }
