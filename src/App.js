@@ -3,18 +3,18 @@ import InputDate from "./Components/InputDate";
 import { React, useState } from "react";
 
 function App() {
-  const [initialDate, setInitialDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [dates, setDates] = useState({
+    start: "2021-09-20",
+    end: "2021-08-21"
+  });
 
   return (
     <div className="App">
       <InputDate
-        initialDate={initialDate}
-        setInitialDate={setInitialDate}
-        endDate={endDate}
-        setEndDate={setEndDate}
+        dates={dates}
+        setDates={setDates}
       />
-      <Graph initialDate={initialDate} endDate={endDate} />
+      <Graph dates={dates} />
     </div>
   );
 }

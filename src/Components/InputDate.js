@@ -1,43 +1,36 @@
 import  React from "react";
 
 function InputDate(props) {
-  const {initialDate, setInitialDate, endDate, setEndDate} = props;
-  /*    
-    const handleInputchange = (event) => {
-      if (isChecked) {
-        setStock(oldList);
-      }
-      if (!isChecked) {
-        setStock(newList);
-      }
-      setIsChecked(!isChecked);
-    };
- */
-console.log(initialDate)
-console.log(endDate)
+  const {dates, setDates} = props;
 
   return (
     <div className="searchBar">
       <h3>From</h3>
       <input
         className="bar"
-        value={initialDate}
+        value={dates.start}
         key="random1"
         min="2021-08-20"
         type="date"
         placeholder={"Search Product"}
-        onChange={(e) => setInitialDate(e.target.value)}
+        onChange={(e) => setDates({
+      ...dates,
+      start: e.target.value,
+    })}
       />
             <h3>To</h3>
       <input
         className="bar"
-        value={endDate}
+        value={dates.end}
         key="random2"
-        min={initialDate}
-        max="2021-09-19"
+        min="2021-08-20"
+        max="2021-09-20"
         type="date"
         placeholder={"Search Product"}
-        onChange={(e) => setEndDate(e.target.value)}
+        onChange={(e) => setDates({
+      ...dates,
+      end: e.target.value,
+    })}
       />
       <div>
         <label>
