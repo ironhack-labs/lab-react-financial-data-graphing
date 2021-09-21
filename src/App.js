@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import Graph from "./Components/Graph";
+import InputDate from "./Components/InputDate";
+import { React, useState } from "react";
 
 function App() {
+  const [dates, setDates] = useState({
+    start: "2021-08-21",
+    end: "2021-09-20"
+  });
+
+  const [state, setState] = useState({
+    dates: [],
+    values: [],
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputDate
+        dates={dates}
+        setDates={setDates}
+        state={state}
+      />
+      <Graph dates={dates} state={state} setState={setState} />
     </div>
   );
 }
