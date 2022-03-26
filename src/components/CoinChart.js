@@ -9,6 +9,8 @@ function CoinChart() {
   const [currency, setCurrency] = useState("USD");
   const [chart, setChart] = useState();
 
+  const [minMaxValue, setMinMaxValue] = useState([0, 0]);
+
   let today = new Date();
   today.setDate(today.getDate() - 1);
   const [endDate, setEndDate] = useState(today.toISOString().split("T")[0]);
@@ -23,7 +25,10 @@ function CoinChart() {
       )
       .then((response) => {
         setDates(Object.keys(response.data.bpi));
-        setValues(Object.values(response.data.bpi));
+        const vals = Object.values(response.data.bpi);
+        setValues(vals);
+
+        setMinMaxValue([Math.min(...vals), Math.max(...vals)]);
 
         document.getElementById("startDate").value = startDate;
         document.getElementById("endDate").value = endDate;
@@ -46,7 +51,7 @@ function CoinChart() {
         labels: dates,
         datasets: [
           {
-            label: "Variação de preço de BitCoin",
+            label: "Valor do Bitcoin",
             data: values,
             fill: true,
             borderColor: "rgb(75, 192, 192)",
@@ -68,7 +73,10 @@ function CoinChart() {
         )
         .then((response) => {
           setDates(Object.keys(response.data.bpi));
-          setValues(Object.values(response.data.bpi));
+          const vals = Object.values(response.data.bpi);
+          setValues(vals);
+
+          setMinMaxValue([Math.min(...vals), Math.max(...vals)]);
         })
         .catch((error) => console.error(error));
     }
@@ -83,7 +91,7 @@ function CoinChart() {
   }
 
   function handleCurrency(event) {
-    setCurrency(event.target.options[event.target.selectedIndex].text);
+    setCurrency(event.target.options[event.target.selectedIndex].value);
   }
 
   return (
@@ -92,10 +100,14 @@ function CoinChart() {
         <input type="date" id="startDate" onChange={handleStartChange}></input>
         <input type="date" id="endDate" onChange={handleEndChange}></input>
         <select id="currency" onChange={handleCurrency} defaultValue={currency}>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="BRL">BRL</option>
+          <option value="USD">US Dollar ($)</option>
+          <option value="EUR">Euro (€)</option>
+          <option value="BRL">Brazilian real (R$)</option>
         </select>
+        <div>
+          <p>Max: {`${minMaxValue[1]} ${currency}`}</p>
+          <p>Min: {`${minMaxValue[0]} ${currency}`}</p>
+        </div>
       </div>
       <div style={{ height: "400px" }}>
         <canvas id="myChart" width="400" height="400"></canvas>
