@@ -9,8 +9,8 @@ function MyChart() {
   const [dates, setDates] = useState([]);
   const [prices, setPrices] = useState([]);
   const [chart, setChart] = useState();
-  const [indexStart, setIndexStart] = useState(null);
-  const [indexEnd, setIndexEnd] = useState(null);
+  const [indexStart, setIndexStart] = useState('');
+  const [indexEnd, setIndexEnd] = useState('');
   const [currency, setCurrency] = useState('USD');
   const [maxValue, setMaxValue] = useState('');
   const [minValue, setMinValue] = useState('');
@@ -39,9 +39,10 @@ function MyChart() {
           } catch (err) {
             console.log(err);
           } 
-    }
+      }
     fetchData();
-    }, [currency])
+    }, [])
+
 
     function handleCurrency(event) {
       const newCurrency = event.target.value
@@ -61,32 +62,33 @@ function MyChart() {
   
       async function fetchDate() {
 
-        if (indexStart && indexEnd !== null) {
+        if (indexStart && indexEnd) {
 
-        try { 
-          const responseTwo = await axios.get(
-            `https://api.coindesk.com/v1/bpi/historical/close.json?start=${indexStart}&end=${indexEnd}`
-          );
-          console.log(responseTwo)
-          const entriesTwo = Object.entries(responseTwo.data.bpi)
-          setDates(entriesTwo.map((currentArr) => currentArr[0]));
-          setPrices(entriesTwo.map((currentArr) => currentArr[1]));
-  
-            const maximumAgain = (entriesTwo.map((currentArr) => parseFloat(currentArr[1])))
-          setMaxValue(maximumAgain.reduce(function(prev, current) {
-            return (prev > current) ? prev : current
-          }))
-          const minimumAgain = (entriesTwo.map((currentArr) => parseFloat(currentArr[1])))
-          setMinValue(minimumAgain.reduce(function(prev, current) {
-            return (prev < current) ? prev : current
-          }))
-          }
-         catch (err) {
-        console.log(err);        
-      }}
-      fetchDate()
+          try { 
+            const responseTwo = await axios.get(
+              `https://api.coindesk.com/v1/bpi/historical/close.json?start=${indexStart}&end=${indexEnd}&currency=${currency}`
+            );
+            console.log(responseTwo)
+            const entriesTwo = Object.entries(responseTwo.data.bpi)
+            setDates(entriesTwo.map((currentArr) => currentArr[0]));
+            setPrices(entriesTwo.map((currentArr) => currentArr[1]));
     
-    }}, [indexStart, indexEnd, currency])
+            const maximumAgain = (entriesTwo.map((currentArr) => parseFloat(currentArr[1])))
+            setMaxValue(maximumAgain.reduce(function(prev, current) {
+              return (prev > current) ? prev : current
+            }))
+            const minimumAgain = (entriesTwo.map((currentArr) => parseFloat(currentArr[1])))
+            setMinValue(minimumAgain.reduce(function(prev, current) {
+              return (prev < current) ? prev : current
+            }))
+          }
+          catch (err) {
+            console.log(err);        
+          }
+        }
+      }
+      fetchDate()
+    }, [indexStart, indexEnd, currency])
   
 
    useEffect(() => {
@@ -141,8 +143,9 @@ function MyChart() {
           <div className='pe-2'>
             <label className="pe-2">Currency:</label>
             <select name="select"
-              onChange={handleCurrency}>
-              <option value="USD" selected>US Dolar</option>
+              onChange={handleCurrency}
+              defaultValue='USD'>
+              <option value="USD">US Dolar</option>
               <option value="BRL">BRL Real</option>
               <option value="EUR">EUR Euro</option>
             </select>
